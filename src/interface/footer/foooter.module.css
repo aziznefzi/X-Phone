@@ -1,0 +1,23 @@
+.socialIcon {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    background: rgba(168, 85, 247, 0.05) !important;
+    margin-right: 8px !important;
+}
+
+.socialIcon:hover {
+    transform: translateY(-5px);
+    background: rgba(168, 85, 247, 0.15) !important;
+    box-shadow: 0 10px 20px rgba(168, 85, 247, 0.2);
+}
+
+.footerContainer {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional: Add a subtle glow in dark mode */
+@media (prefers-color-scheme: dark) {
+    .socialIcon:hover {
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+    }
+}

@@ -1,0 +1,44 @@
+{
+  "header": {
+    "home": "Home",
+    "offers": "Offers",
+    "brands": "Brands",
+    "about": "About",
+    "footer": "Footer",
+    "shopNow": "Shop Now",
+    "Lang": "Lang",
+    "english": "English",
+    "arabic": "Arabic"
+  },
+  "home": {
+    "welcome": "Home",
+    "title": "Discover the Future of Technology",
+    "subtitle": "Experience the next generation of mobile innovation with Phone-X. Sleek design, powerful performance, and unparalleled connectivity.",
+    "cta": "Explore Now"
+  },
+    "offers": {
+    "AllProduct": "All Product"
+  },
+  "about": {
+    "title": "Why Choose Phone-X?",
+    "subtitle": "We are at the forefront of mobile innovation, delivering cutting-edge technology that empowers your lifestyle.",
+    "innovation": "Innovation",
+    "innovationDesc": "Always ahead with the latest features.",
+    "security": "Security",
+    "securityDesc": "Your data is protected with military-grade encryption.",
+    "support": "Support",
+    "supportDesc": "Expert help available 24/7."
+  },
+  "footer": {
+    "title": "Phone-X",
+    "farewell": "Thank you for visiting! We hope to see you soon in the advanced world of Phone-X.",
+    "rights": "All rights reserved © 2026 Phone-X",
+    "quickLinks": "Quick Links",
+    "links": {
+      "home": "Home",
+      "offers": "Offers",
+      "brands": "Brands",
+      "about": "About Us"
+    }
+  }
+}

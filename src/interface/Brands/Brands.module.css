@@ -1,0 +1,92 @@
+.Brands {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+}
+
+.gradientText {
+    display: inline-block;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 4.7rem;
+    margin-bottom: 3rem;
+}
+
+.BrandsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3.5rem;
+    padding: 2rem;
+}
+
+.BrandsItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 10px;
+    border-radius: 50%;
+    border: 5px solid var(--color7);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.BrandsItem:hover {
+    transform: translateY(-10px);
+}
+
+.brandIcon {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+}
+
+/* Invert icons in dark mode so they appear light/white */
+:global(.dark) .iconMode {
+    filter: brightness(0) invert(1);
+}
+
+/* For light mode, ensure they are dark */
+:global(.light) .iconMode {
+    filter: brightness(0);
+}
+
+.BrandsItem span {
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .gradientText {
+        font-size: 3.2rem;
+    }
+    .brandIcon {
+        width: 50px;
+        height: 50px;
+    }
+    .BrandsContainer {
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gradientText {
+        font-size: 2.5rem;
+    }
+    .brandIcon {
+        width: 40px;
+        height: 40px;
+    }
+    .BrandsContainer {
+        gap: 1.5rem;
+    }
+}
