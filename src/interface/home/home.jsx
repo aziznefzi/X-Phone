@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react'
-import style from './home.module.css'
-import { useTranslation } from 'react-i18next';
-import { useTheme } from '@mui/material/styles';
-import { animate, random, remove } from 'animejs';
+import React, { useEffect, useRef } from "react";
+import style from "./home.module.css";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "@mui/material/styles";
+import { animate, random, remove } from "animejs";
 
-import LogoDark from "../../frontend/image/LogoDark.png"
-import LogoLight from "../../frontend/image/LogoLight.png"
+import LogoDark from "../../frontend/image/LogoDark.png";
+import LogoLight from "../../frontend/image/LogoLight.png";
 export default function Home() {
   const { t } = useTranslation();
   const holderRef = useRef(null);
@@ -26,7 +26,7 @@ export default function Home() {
         rotate: () => random(0, 360),
         scale: () => random(0.3, 1.5),
         duration: () => random(3000, 6000),
-        easing: 'easeInOutQuad',
+        easing: "easeInOutQuad",
         onComplete: randomValues,
       });
     };
@@ -50,19 +50,19 @@ export default function Home() {
     }
 
     function rnd_sign() {
-      return (Math.random() > 0.5) ? 1 : -1;
+      return Math.random() > 0.5 ? 1 : -1;
     }
 
     function dtr(deg) {
-      return deg * pi / 180;
+      return (deg * pi) / 180;
     }
 
     function Line(Wave, color) {
       this.angle = [
-        Math.sin(Wave.angle[0] += Wave.speed[0]),
-        Math.sin(Wave.angle[1] += Wave.speed[1]),
-        Math.sin(Wave.angle[2] += Wave.speed[2]),
-        Math.sin(Wave.angle[3] += Wave.speed[3])
+        Math.sin((Wave.angle[0] += Wave.speed[0])),
+        Math.sin((Wave.angle[1] += Wave.speed[1])),
+        Math.sin((Wave.angle[2] += Wave.speed[2])),
+        Math.sin((Wave.angle[3] += Wave.speed[3])),
       ];
       this.color = color;
     }
@@ -128,12 +128,12 @@ export default function Home() {
         speed: [0.004, 0.008],
         debug: false,
         fps: false,
-        ...options
+        ...options,
       };
       this.waves = [];
       this.holder = holder;
-      this.canvas = document.createElement('canvas');
-      this.ctx = this.canvas.getContext('2d');
+      this.canvas = document.createElement("canvas");
+      this.ctx = this.canvas.getContext("2d");
       this.holder.appendChild(this.canvas);
       this.hue = this.options.hue[0];
       this.hueFw = true;
@@ -144,7 +144,7 @@ export default function Home() {
 
       if (this.options.resize) {
         this.resizeHandler = this.resize.bind(this);
-        window.addEventListener('resize', this.resizeHandler);
+        window.addEventListener("resize", this.resizeHandler);
       }
     }
 
@@ -194,20 +194,21 @@ export default function Home() {
     Waves.prototype.resize = function () {
       const width = this.holder.offsetWidth;
       const height = this.holder.offsetHeight;
-      this.scale = window.devicePixelRatio || 1;
+      this.scale = Math.min(window.devicePixelRatio || 1, 2);
       this.width = width * this.scale;
       this.height = height * this.scale;
       this.canvas.width = this.width;
       this.canvas.height = this.height;
-      this.canvas.style.width = '100%';
-      this.canvas.style.height = '100%';
-      this.radius = Math.sqrt(Math.pow(this.width, 2) + Math.pow(this.height, 2)) / 2;
+      this.canvas.style.width = "100%";
+      this.canvas.style.height = "100%";
+      this.radius =
+        Math.sqrt(Math.pow(this.width, 2) + Math.pow(this.height, 2)) / 2;
       this.centerX = this.width / 2;
       this.centerY = this.height / 2;
     };
 
     Waves.prototype.updateColor = function () {
-      this.hue += (this.hueFw) ? 0.01 : -0.01;
+      this.hue += this.hueFw ? 0.01 : -0.01;
       if (this.hue > this.options.hue[1] && this.hueFw) {
         this.hue = this.options.hue[1];
         this.hueFw = false;
@@ -221,10 +222,15 @@ export default function Home() {
       this.color = `rgba(${a},${b},${c}, 0.15)`;
     };
 
-    const wavesInstance = new Waves(holderRef.current, {
-      waves: 3,
-      width: 200,
-    }, bgColor);
+    const isMobile = window.innerWidth < 768;
+    const wavesInstance = new Waves(
+      holderRef.current,
+      {
+        waves: isMobile ? 2 : 3,
+        width: isMobile ? 100 : 200,
+      },
+      bgColor,
+    );
 
     wavesInstance.animate();
 
@@ -233,32 +239,50 @@ export default function Home() {
         window.cancelAnimationFrame(wavesInstance.animationId);
       }
       if (wavesInstance.resizeHandler) {
-        window.removeEventListener('resize', wavesInstance.resizeHandler);
+        window.removeEventListener("resize", wavesInstance.resizeHandler);
       }
       if (wavesInstance.canvas && wavesInstance.canvas.parentNode) {
         wavesInstance.canvas.parentNode.removeChild(wavesInstance.canvas);
       }
     };
   }, [bgColor]);
-  
-  const LogoTheme = theme.palette.mode === 'dark' ? LogoDark : LogoLight; 
+
+  const LogoTheme = theme.palette.mode === "dark" ? LogoDark : LogoLight;
 
   return (
-    <div id='home' className={style.home}>
+    <div id="home" className={style.home}>
       <div ref={holderRef} className={style.holder}></div>
       <div ref={shapesContainerRef} className={style.shapesContainer}>
-        {[...Array(5)].map((_, i) => <div key={`sq-${i}`} className={style.square}></div>)}
-        {[...Array(5)].map((_, i) => <div key={`ci-${i}`} className={style.circle}></div>)}
-        {[...Array(5)].map((_, i) => <div key={`tr-${i}`} className={style.triangle}></div>)}
+        {[
+          ...Array(
+            typeof window !== "undefined" && window.innerWidth < 768 ? 3 : 5,
+          ),
+        ].map((_, i) => (
+          <div key={`sq-${i}`} className={style.square}></div>
+        ))}
+        {[
+          ...Array(
+            typeof window !== "undefined" && window.innerWidth < 768 ? 3 : 5,
+          ),
+        ].map((_, i) => (
+          <div key={`ci-${i}`} className={style.circle}></div>
+        ))}
+        {[
+          ...Array(
+            typeof window !== "undefined" && window.innerWidth < 768 ? 3 : 5,
+          ),
+        ].map((_, i) => (
+          <div key={`tr-${i}`} className={style.triangle}></div>
+        ))}
       </div>
       <div className={style.content}>
         <div className={style.Title}>
           <img src={LogoTheme} alt="Phone-X Logo" />
-          <h1 className={style.heroTitle}>{t('home.title')}</h1>
+          <h1 className={style.heroTitle}>{t("home.title")}</h1>
         </div>
-        <p className={style.heroSubtitle}>{t('home.subtitle')}</p>
-        <button className={style.heroCTA}>{t('home.cta')}</button>
+        <p className={style.heroSubtitle}>{t("home.subtitle")}</p>
+        <button className={style.heroCTA}>{t("home.cta")}</button>
       </div>
     </div>
-  )
+  );
 }
