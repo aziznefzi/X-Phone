@@ -17,6 +17,7 @@ export default function Footer() {
 
   return (
     <Box 
+      id='footer'
       component="footer" 
       sx={{ 
         bgcolor: bg, 
