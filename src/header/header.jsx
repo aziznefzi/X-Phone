@@ -32,7 +32,9 @@ export default function Header() {
     const NavList = links.map((item) => {
         const Icon = item.icon;
         return (
-            <li key={item.id} className={style.navItem}>
+            <li key={item.id}
+            onClick={() => { setNavOpen(false) }}
+            className={style.navItem}>
                 <a 
                 style={{color: theme.palette.WebsiteMode.text.text5}}
                 href={item.href}
