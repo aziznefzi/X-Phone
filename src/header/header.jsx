@@ -49,6 +49,11 @@ export default function Header() {
     })
 
     const toggleNav = () => {
+        if(navOpen === true){
+            document.body.style.overflow = 'auto';
+        }else{
+            document.body.style.overflow = 'hidden';
+        }
         setNavOpen(!navOpen);
     };
     const toggleTheme = () => {
