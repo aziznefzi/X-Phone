@@ -48,12 +48,15 @@ export default function Header() {
         )
     })
 
-    const toggleNav = () => {
-        if(navOpen === true){
-            document.body.style.overflow = 'auto';
-        }else{
+    useEffect(() => {
+        if (navOpen) {
             document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
         }
+    }, [navOpen]);
+
+    const toggleNav = () => {
         setNavOpen(!navOpen);
     };
     const toggleTheme = () => {
